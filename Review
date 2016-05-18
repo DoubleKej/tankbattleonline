@@ -1,0 +1,9 @@
+1.
+    this.x + = speedX;
+    this.y + = speedY;
+    
+        + += chứ không phải + =
+        + 2 thuộc tính speedX và speedY phải gọi thông qua con trỏ this, Chứ không thể gọi trực tiếp
+        do cấu trúc của Javascript, không cần khai báo đối tượng có thuộc tính gì từ ban đầu mà trong quá trình code
+        cứ thấy cái nào this.abc thì abc sẽ là thuộc tính của nó.
+    

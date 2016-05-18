@@ -21,8 +21,10 @@ class Tank{
         this.direction = 1;
     }
     update(){
-        this.x + = speedX;
-        this.y + = speedY;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // this.x + = speedX;
+        // this.y + = speedY;
     }
     draw(context){
         context.drawImage(this.sprite, this.x,  this.y);
