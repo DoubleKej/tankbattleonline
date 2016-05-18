@@ -1,31 +1,30 @@
 /**
- * Created by kej on 16/05/2016.
+ * Created by kej on 18/05/2016.
  */
-
-class tank{
+class bullet{
     constructor(x,y){
         this.x=x;
         this.y=y;
         this.speedX=0;
         this.speedY=0;
-        this.sprite = new Image();
-        this.spriteUp = new Image();
-        this.spriteDown = new Image();
-        this.spriteLeft = new Image();
-        this.spriteRight = new Image();
-        this.spriteDown.src = "images/tank_player1_down_c0_t2_s1.png";
-        this.spriteUp.src = "images/tank_player1_up_c0_t2_s1.png";
-        this.spriteLeft.src = "images/tank_player1_left_c0_t2_s1.png";
-        this.spriteRight.src = "images/tank_player1_right_c0_t2_s1.png";
+        this.sprite=new Image();
+        this.spriteUp=new Image();
+        this.spriteDown=new Image();
+        this.spriteLeft=new Image();
+        this.spriteRight=new Image();
+        this.spriteUp.src="images/bullet_up.png";
+        this.spriteDown.src=-"images/bullet_down.png";
+        this.spriteLeft.src="images/bullet_left.png";
+        this.spriteRight.src="images/bullet_right.png";
         this.sprite = this.spriteUp;
-        this.direction = 1;
+        this.direction=1;
     }
     update(){
-        this.x + = this.speedX;
-        this.y + = this.speedY;
+        this.x+=this.speedX;
+        this.y+=this.speedY;
     }
     draw(context){
-        context.drawImage(this.sprite, this.x, this.y);
+        context.drawImage(this.sprite,this.x,this.y);
     }
     move(direction){
         switch (direction){
@@ -55,4 +54,6 @@ class tank{
                 break;
         }
     }
+}
+
 }

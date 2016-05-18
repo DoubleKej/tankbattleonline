@@ -18,7 +18,7 @@ var gameLoop = function () {
 
 }
 function gameStart() {
-    player = new Tank(100,100);
+    player = new tank(100,100);
 }
 
 function gameUpdate() {
