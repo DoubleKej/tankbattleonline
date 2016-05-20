@@ -64,7 +64,6 @@ class Tank{
     }
     shoot(){
         var bullet = new Bullet(this.x+12, this.y+12, this.direction);
-            
             this.bullets.push(bullet);
     }
 }
