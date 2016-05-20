@@ -1,8 +1,8 @@
 /**
  * Created by kej on 18/05/2016.
  */
-class bullet{
-    constructor(x,y){
+class Bullet{
+    constructor(x,y,direction){
         this.x=x;
         this.y=y;
         this.speedX=0;
@@ -17,7 +17,25 @@ class bullet{
         this.spriteLeft.src="images/bullet_left.png";
         this.spriteRight.src="images/bullet_right.png";
         this.sprite = this.spriteUp;
-        this.direction=1;
+        
+        switch(direction){
+            case 1://up
+                this.speedY = -4;
+                this.sprite = this.spriteUp;
+                break;
+            case 2://down
+                this.speedY = 4;
+                this.sprite = this.spriteDown;
+                break;
+            case 3://left
+                this.speedX = -4;
+                this.sprite = this.spriteLeft;
+                break;
+            case 4://right
+                this.speedX = 4;
+                this.sprite = this.spriteRight;
+                break;
+        }
     }
     update(){
         this.x+=this.speedX;
@@ -26,34 +44,33 @@ class bullet{
     draw(context){
         context.drawImage(this.sprite,this.x,this.y);
     }
-    move(direction){
-        switch (direction){
-            case 87:
-                this.speedY= -3;
-                this.speedX= 0;
-                this.sprite = this.spriteUp;
-                this.direction =1;
-                break;
-            case 83:
-                this.speedY= 3;
-                this.speedX= 0;
-                this.sprite = this.spriteDown;
-                this.direction = 2;
-                break;
-            case 65:
-                this.speedY= 0;
-                this.speedX= -3;
-                this.sprite = this.spriteLeft;
-                this.direction = 3;
-                break;
-            case 68:
-                this.speedY= 0;
-                this.speedX= 3;
-                this.sprite = this.spriteRight;
-                this.direction = 4;
-                break;
-        }
-    }
+    // move(direction){
+    //     switch (direction){
+    //         case 1:
+    //             this.speedY= -5;
+    //             this.speedX= 0;
+    //             this.sprite = this.spriteUp;
+    //             this.direction =1;
+    //             break;
+    //         case 2:
+    //             this.speedY= 5;
+    //             this.speedX= 0;
+    //             this.sprite = this.spriteDown;
+    //             this.direction = 2;
+    //             break;
+    //         case 3:
+    //             this.speedY= 0;
+    //             this.speedX= -5;
+    //             this.sprite = this.spriteLeft;
+    //             this.direction = 5;
+    //             break;
+    //         case 4:
+    //             this.speedY= 0;
+    //             this.speedX= 5;
+    //             this.sprite = this.spriteRight;
+    //             this.direction = 4;
+    //             break;
+    //     }
+    // }
 }
 
-}

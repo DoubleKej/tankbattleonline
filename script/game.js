@@ -12,17 +12,24 @@ var context;
     setInterval(gameLoop, 17);
 }
 var player;
+var countBullet = 0;
+var bullet = [];
+
 var gameLoop = function () {
     gameUpdate();
     gameDrawer(context);
 
 }
 function gameStart() {
-    player = new tank(100,100);
+    player = new Tank(100,100);
+
+
 }
 
 function gameUpdate() {
     player.update();
+
+    // bullet.update();
 }
 
 function gameDrawer(context) {
@@ -30,6 +37,7 @@ function gameDrawer(context) {
     context.fillRect(0,0,window.innerWidth,window.innerHeight);
     player.draw(context);
 }
+
 
 window.onkeydown = function (e) {
     switch (e.keyCode){
@@ -44,6 +52,10 @@ window.onkeydown = function (e) {
             break;
         case 68:
             player.move(4);
+            break;
+        case 32:
+            countBullet +=1;
+            player.shoot();
             break;
 
     }
