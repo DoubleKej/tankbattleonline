@@ -13,7 +13,7 @@ class Bullet{
         this.spriteLeft=new Image();
         this.spriteRight=new Image();
         this.spriteUp.src="images/bullet_up.png";
-        this.spriteDown.src=-"images/bullet_down.png";
+        this.spriteDown.src="images/bullet_down.png";
         this.spriteLeft.src="images/bullet_left.png";
         this.spriteRight.src="images/bullet_right.png";
         this.sprite = this.spriteUp;
