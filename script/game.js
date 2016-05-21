@@ -60,7 +60,7 @@ var waterArray = new Array();
 }
 var player;
 var countBullet = 0;
-var bullet = [];
+//var bullet = [];
 
 var gameLoop = function () {
     gameUpdate();
