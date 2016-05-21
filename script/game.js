@@ -74,7 +74,7 @@ function gameStart() {
 
 function gameUpdate() {
     player.update();
-
+    player.bulletTouchBrick();
     // bullet.update();
 }
 
