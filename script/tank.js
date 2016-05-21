@@ -108,11 +108,11 @@ class Tank{
         return false;
     }
     bulletTouchBrick() {
-        for (var i = 0; i < this.bullets.length; i++) {
-            var s1 = {x: this.bullets[i].x, y: this.bullets[i].y, width: 5, height: 5} //s1: bullet
+        for (var i = 0; i < this.bullet.length; i++) {
+            var s1 = {x: this.bullet[i].x, y: this.bullet[i].y, width: 5, height: 5} //s1: bullet
             for (var j = 0; j < brickArray.length; j++) {
                 var s2 = {x: brickArray[j].x, y: brickArray[j].y, width: 16, height: 16} //s2 :brick
-                    this.bullets.pop();
+                    this.bullet.pop();
                     brickArray.splice(j, 1);
                     break;
                 }
