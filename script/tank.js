@@ -97,7 +97,7 @@ class Tank{
     }
     shoot(){
         var bullet = new Bullet(this.x+12, this.y+12, this.direction);
-            this.bullets.push(bullet);
+        this.bullets.push(bullet);
     }
     checkCollision(rect1, rect2){
         if (rect1.x < rect2.x + rect2.width &&
@@ -117,10 +117,10 @@ class Tank{
                 var s2 = {x: brickArray[j].x, y: brickArray[j].y, width: 16, height: 16};
                 if(this.checkCollision(s1,s2)==true) {
                     brickArray.splice(j, 1);
+                    this.bullets.splice(0,1);
                     break;
                 }
-                }
             }
-
         }
+    }
 }
