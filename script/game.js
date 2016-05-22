@@ -80,12 +80,19 @@ function gameStart() {
 function gameUpdate() {
     player.update();
     player.bulletTouchBrick();
+    player.bulletTouchSteel();
+    for(var i = 0; i <waterArray.length; i++){
+        waterArray[i].update();
+    }
     // bullet.update();
 }
 
 function gameDrawer(context) {
     context.fillStyle = "black";
     context.fillRect(0,0,window.innerWidth,window.innerHeight);
+    for(var i=0;i<waterArray.length;i++){
+        waterArray[i].draw(context);
+    }
     player.draw(context);
     for(var i=0;i<brickArray.length;i++){
         brickArray[i].draw(context);
@@ -93,9 +100,7 @@ function gameDrawer(context) {
     for(var i=0;i<steelArray.length;i++){
         steelArray[i].draw(context);
     }
-    for(var i=0;i<waterArray.length;i++){
-        waterArray[i].draw(context);
-    }
+
     for(var i=0;i<treeArray.length;i++){
         treeArray[i].draw(context);
     }

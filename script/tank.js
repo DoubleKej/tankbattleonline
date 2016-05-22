@@ -8,15 +8,19 @@ class Tank{
         this.y=y;
         this.speedX=0;
         this.speedY=0;
-        this.sprite = new Image();
-        this.spriteUp = new Image();
-        this.spriteDown = new Image();
-        this.spriteLeft = new Image();
-        this.spriteRight = new Image();
-        this.spriteDown.src = "images/tank_player1_down_c0_t2_s1.png";
-        this.spriteUp.src = "images/tank_player1_up_c0_t2_s1.png";
-        this.spriteLeft.src = "images/tank_player1_left_c0_t2_s1.png";
-        this.spriteRight.src = "images/tank_player1_right_c0_t2_s1.png";
+        this.spriteUp = new Animation(this.x, this.y, "tank_player1_up_c0_s1_t",2,7);
+        this.spriteDown = new Animation(this.x, this.y, "tank_player1_down_c0_s1_t",2,7);
+        this.spriteLeft = new Animation(this.x, this.y, "tank_player1_left_c0_s1_t",2,7);
+        this.spriteRight = new Animation(this.x, this.y, "tank_player1_right_c0_s1_t",2,7);
+        // this.sprite = new Image();
+        // this.spriteUp = new Image();
+        // this.spriteDown = new Image();
+        // this.spriteLeft = new Image();
+        // this.spriteRight = new Image();
+        // this.spriteDown.src = "images/tank_player1_down_c0_t2_s1.png";
+        // this.spriteUp.src = "images/tank_player1_up_c0_t2_s1.png";
+        // this.spriteLeft.src = "images/tank_player1_left_c0_t2_s1.png";
+        // this.spriteRight.src = "images/tank_player1_right_c0_t2_s1.png";
         // this.spriteDown.src = "images/fighter_down.png";
         // this.spriteUp.src = "images/fighter_up.png";
         // this.spriteLeft.src = "images/fighter_left.png";
@@ -24,13 +28,10 @@ class Tank{
         this.bullets = [] ;
         this.sprite = this.spriteUp;
         this.direction = 1;
-
     }
     update(){
         var isMove = true;
         var rect1 = {x:this.x+this.speedX, y:this.y+this.speedY, width:32, height:32};
-
-
         for(var i = 0; i< brickArray.length; i++){
             var rect2 = {x:brickArray[i].x, y:brickArray[i].y, width:16, height:16};
             if(this.checkCollision(rect1,rect2)==true){
@@ -46,7 +47,7 @@ class Tank{
             }
         }
         for(var i = 0; i< waterArray.length; i++){
-            var rect2 = {x:waterArray[i].x, y:waterArray[i].y, width:16, height:16};
+            var rect2 = {x:waterArray[i].x, y:waterArray[i].y, width:32, height:32};
             if(this.checkCollision(rect1,rect2)==true){
                 isMove= false;
                 break;
@@ -59,10 +60,12 @@ class Tank{
         for( var i =0; i<this.bullets.length; i++){
             this.bullets[i].update();
         }
-
+        if(this.speedX!=0 || this.speedY !=0){
+            this.sprite.update();
+        }
     }
     draw(context){
-        context.drawImage(this.sprite, this.x, this.y);
+        this.sprite.draw(context);
         for( var i =0; i<this.bullets.length; i++){
             this.bullets[i].draw(context);
         }
@@ -117,7 +120,21 @@ class Tank{
                 var s2 = {x: brickArray[j].x, y: brickArray[j].y, width: 16, height: 16};
                 if(this.checkCollision(s1,s2)==true) {
                     brickArray.splice(j, 1);
-                    this.bullets.splice(0,1);
+                    this.bullets.splice(i,1);
+                    break;
+                }
+            }
+        }
+    }
+    bulletTouchSteel() {
+        for (var i = 0; i < this.bullets.length; i++) {
+            //s1: bullet - s2: steel
+            var s1 = {x: this.bullets[i].x, y: this.bullets[i].y, width: 5, height: 5};
+            for (var j = 0; j < steelArray.length; j++) {
+                var s2 = {x: steelArray[j].x, y: steelArray[j].y, width: 16, height: 16};
+                if(this.checkCollision(s1,s2)==true) {
+                    // steelArray.splice(j, 1);
+                    this.bullets.splice(i,1);
                     break;
                 }
             }
