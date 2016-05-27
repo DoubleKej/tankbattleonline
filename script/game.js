@@ -1,12 +1,15 @@
 /**
  * Created by kej on 16/05/2016.
  */
+
 var context;
 var map;
+var socket;
 var brickArray = new Array();
 var steelArray = new Array();
 var waterArray = new Array();
 var treeArray = new  Array();
+var enemyTanks = new Array();
     window.onload = function () {
     var canvas = document.createElement("canvas");
     context = canvas.getContext("2d");
@@ -62,6 +65,7 @@ var treeArray = new  Array();
                 }
             }
         }
+        initSocketClient();
 }
 var player;
 var countBullet = 0;
@@ -71,18 +75,57 @@ var gameLoop = function () {
     gameUpdate();
     gameDrawer(context);
 
-}
+};
 function gameStart() {
     player = new Tank(100,100);
 
+}
+
+function initSocketClient() {
+    socket = io.connect();
+    socket.emit('player_created',{x:player.x,y:player.y});
+    socket.on('player_id',function (data) {
+        console.log(data.id);
+        player.id = data.id;
+        for (var i = 0; i < data.tanks.length; i++) {
+            var enemy = new Tank(data.tanks[i].x, data.tanks[i].y);
+            enemy.id = data.tanks[i].id;
+            enemyTanks.push(enemy);
+        }
+    });
+    socket.on('new_player_connected', function (data) {
+        var newTank = new Tank(data.x,data.y);
+        newTank.id = data.id;
+        enemyTanks.push(newTank);
+    });
+    socket.on('enemy_update', function (data) {
+        for (var i = 0; i < enemyTanks.length; i++){
+            if (enemyTanks[i].id == data.id){
+                enemyTanks[i].direction = data.direction;
+                enemyTanks[i].x = data.x;
+                enemyTanks[i].y = data.y;
+                enemyTanks[i].sprite.x = data.x;
+                enemyTanks[i].sprite.y = data.y;
+                console.log(data.id + "-" +data.x + " " + data.y);
+                break;
+            }
+        }
+    })
 }
 
 function gameUpdate() {
     player.update();
     player.bulletTouchBrick();
     player.bulletTouchSteel();
+    socket.emit('player_update',{x: player.x, y: player.y, id: player.id, direction: player.direction});
+    for (var i = 0; i < enemyTanks.length; i++){
+        enemyTanks[i].update();
+    }
     for(var i = 0; i <waterArray.length; i++){
         waterArray[i].update();
+    }
+    for(var i = 0; i <enemyTanks.length; i++){
+        enemyTanks[i].update();
     }
     // bullet.update();
 }
@@ -90,6 +133,9 @@ function gameUpdate() {
 function gameDrawer(context) {
     context.fillStyle = "black";
     context.fillRect(0,0,window.innerWidth,window.innerHeight);
+    for(var i=0;i<enemyTanks.length;i++){
+        enemyTanks[i].draw(context);
+    }
     for(var i=0;i<waterArray.length;i++){
         waterArray[i].draw(context);
     }

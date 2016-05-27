@@ -28,6 +28,7 @@ class Tank{
         this.bullets = [] ;
         this.sprite = this.spriteUp;
         this.direction = 1;
+        this.id = 0;
     }
     update(){
         var isMove = true;
@@ -61,7 +62,7 @@ class Tank{
             this.bullets[i].update();
         }
         if(this.speedX!=0 || this.speedY !=0){
-            this.sprite.update();
+            this.sprite.update(this.x, this.y);
         }
     }
     draw(context){

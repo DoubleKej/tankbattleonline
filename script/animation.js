@@ -18,7 +18,9 @@ class Animation{
             this.sprites.push(image);
         }
     }
-    update(){
+    update(x,y){
+        this.x = x;
+        this.y = y;
         this.count++;
         if(this.count >= this.speed){
             this.count = 0;

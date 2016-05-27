@@ -11,6 +11,6 @@ class Water{
         this.sprite.draw(context);
     }
     update(){
-        this.sprite.update();
+        this.sprite.update(this.x, this.y);
     }
 }
